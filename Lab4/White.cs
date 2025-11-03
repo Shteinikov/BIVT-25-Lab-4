@@ -225,27 +225,51 @@ namespace Lab4
             else if (A == null)
             {
                 C = new int[B.Length];
-                Array.Copy(B, C, B.Length);
+                for (int i = 0; i < B.Length; i++)
+                {
+                    C[i] = B[i];
+                }
             }
             else if (B == null)
             {
                 C = new int[A.Length];
-                Array.Copy(A, C, A.Length);
+                for (int i = 0; i < A.Length; i++)
+                {
+                    C[i] = A[i];
+                }
             }
             else
             {
                 C = new int[A.Length + B.Length];
                 int index = 0;
-                int i = 0, j = 0;
+                int minLength = A.Length < B.Length ? A.Length : B.Length;
 
-                while (i < A.Length && j < B.Length)
+                
+                for (int i = 0; i < minLength; i++)
                 {
-                    C[index++] = A[i++];
-                    C[index++] = B[j++];
+                    C[index] = A[i];
+                    index++;
+                    C[index] = B[i];
+                    index++;
                 }
 
-                while (i < A.Length) C[index++] = A[i++];
-                while (j < B.Length) C[index++] = B[j++];
+                
+                if (A.Length > minLength)
+                {
+                    for (int i = minLength; i < A.Length; i++)
+                    {
+                        C[index] = A[i];
+                        index++;
+                    }
+                }
+                else if (B.Length > minLength)
+                {
+                    for (int i = minLength; i < B.Length; i++)
+                    {
+                        C[index] = B[i];
+                        index++;
+                    }
+                }
             }
             // end
 
