@@ -282,24 +282,33 @@ namespace Lab4
             if (raw != null && raw.Length >= 3)
             {
                 restored = new double[raw.Length];
-                Array.Copy(raw, restored, raw.Length);
-                if (restored[0] == -1 && restored[1] != -1 && restored[raw.Length - 1] != -1)
+
+                
+                for (int i = 0; i < raw.Length; i++)
                 {
-                    restored[0] = (restored[1] + restored[raw.Length - 1]) / 2;
+                    restored[i] = raw[i];
                 }
-                if (restored[raw.Length - 1] == -1 && restored[0] != -1 && restored[raw.Length - 2] != -1)
+
+                
+                if (restored[0] == -1.0 && restored[1] != -1.0 && restored[raw.Length - 1] != -1.0)
                 {
-                    restored[raw.Length - 1] = (restored[0] + restored[raw.Length - 2]) / 2;
+                    restored[0] = (restored[1] + restored[raw.Length - 1]) / 2.0;
                 }
+
+                
+                if (restored[raw.Length - 1] == -1.0 && restored[0] != -1.0 && restored[raw.Length - 2] != -1.0)
+                {
+                    restored[raw.Length - 1] = (restored[0] + restored[raw.Length - 2]) / 2.0;
+                }
+
+                
                 for (int i = 1; i < raw.Length - 1; i++)
                 {
-                    double prev = restored[(i - 1)];
-                    double next = restored[(i + 1)];
-                    if (restored[i] == -1 && prev != -1 && next != -1)
+                    double prev = restored[i - 1];
+                    double next = restored[i + 1];
+                    if (restored[i] == -1.0 && prev != -1.0 && next != -1.0)
                     {
-
-                        restored[i] = (prev + next) / 2;
-
+                        restored[i] = (prev + next) / 2.0;
                     }
                 }
             }
